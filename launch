@@ -1,0 +1,261 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    public class aGV
+    {
+
+        ///// * Beginning of Local Variables naming convention
+
+
+
+        public const int V = 15;    // This is v
+
+        public const int K = 6;     // This is k
+
+        public const int T = 3;     // This is t
+
+
+        public const int T2 = 2;        // This is T 2
+
+        public const int T3 = 3;        // This is T 3
+
+        public const int T4 = 4;        // This is T 4
+
+        public const int T5 = 5;        // This is T 5
+
+
+        public const int BLOCKS = 10;
+
+        public const int REPLACEMENT_MAXBLOCK = 10;
+
+        public const int REPLACEMENT_ACTIVEBLOCKS = 10;
+
+
+        public const int MAX_ELEMENT_APPEARANCE = 8;     // This is the maximum number of appearances in ELEMENT_TYPE by any one of the V elements (changes for every covering design). It is always 1 more than the actual number because of the 0
+
+        public const int MAX_POINTS_INSTANCE_APPEARANCE = 10; // This is the maximum number of times that a point can be repeated (ex: point 1,2,3 is point no 1 and it can only occur this many times)
+
+
+
+        public const int REPS = 350;
+
+        public const int STEP_BACK_PTS_FT = 6; // was 6 before
+
+        public const int V_LOW_BOUND = 23; // was 3 before
+
+        public const int SOUND_BELL_AT = 400;
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                 ALLOCATION OF ROWS AND COLUMNS FOR GLOBAL ARRAYS
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // ...
+
+        public static int COMMON_POINTS_1_ELEMENT_ALLOCATION = 150;
+
+        public static int COMMON_POINTS_2_ELEMENT_ALLOCATION = COMMON_POINTS_1_ELEMENT_ALLOCATION * 2;
+
+        public static int COMMON_POINTS_2_ELEMENT_INSTANCES_V_BY_V_FOUND_ROWS_ALLOCATION = aGV.V + 1; // 3001
+
+        public static int COMMON_POINTS_COVERING_AND_ELEMENT_ALLOCATION = 8;
+
+
+        public const int K1_TYPE_FOUND_ROWS_ALLOCATION = (BLOCKS * K) + 1;
+
+        public const int BLOCK_TYPE_1_FOUND_ROWS_ALLOCATION = (BLOCKS * K) + 1; // 20000
+
+        public const int ELEMENT_TYPE_1_FOUND_ROWS_ALLOCATION = BLOCKS + 1; // 15000
+
+
+        public const int BLOCK_TYPE_2_FOUND_ROWS_ALLOCATION = (BLOCKS * K) + 1; // 20000
+
+        public const int ELEMENT_TYPE_2_FOUND_ROWS_ALLOCATION = BLOCKS + 1; // 15000
+
+        public const int _1ST__TRIO__K_TYPE_FOUND_ROWS_ALLOCATION = 100; // FIX EVENTUALLY
+
+        public const int _1ST___TRIO___BLOCK_TYPE_FOUND_ROWS_ALLOCATION = 300; // (2 * BLOCKS) + 1; // FIX EVENTUALLY (changed from (2 * BLOCKS) + 1 to 100
+
+        public const int COVERING_TYPE_FOUND_ROWS_ALLOCATION = 412; // Fix should be 412
+
+
+
+
+
+
+        public const int BLOCK_TYPE_CONFIG_ROWS_ALLOCATION = (6 * BLOCKS) + 1; // 10001  // Temporarily changed  for (2 * BLOCKS) to 6 * BLOCKS
+
+        public const int BLOCK_TYPE_INTER_ROWS_ALLOCATION = (6 * BLOCKS) + 1; // 10001  // Temporarily changed  for (2 * BLOCKS) to 6 * BLOCKS
+
+        public const int BLOCK_TYPE_GIP_ROWS_ALLOCATION = (6 * BLOCKS) + 1; // 15001  // Temporarily changed  for (2 * BLOCKS) to 6 * BLOCKS
+
+
+        public static int ELEMENT_TYPE_CONFIG_FOUND_ROWS_ALLOCATION = (6 * aGV.V) + 1; // 5001 // Temporarily changed to (6 * aGV.V) for (2 * aGV.V)
+
+        public static int ELEMENT_TYPE_INTER_FOUND_ROWS_ALLOCATION = (6 * aGV.V) + 1; // 5001 // Temporarily changed to (6 * aGV.V) for (2 * aGV.V)
+
+        public static int ELEMENT_TYPE_GIP_FOUND_ROWS_ALLOCATION = (6 * aGV.V) + 1; // 10001 // Temporarily changed to (6 * aGV.V) for (2 * aGV.V)
+
+
+
+        // ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////// END OF CONSTANTS THAT CHANGE WITH EVERY COVERING /////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        public const int PREVIOUS = 1; // This rarely changes (maybe remove eventually)
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                    CONSTANTS THAT DO NOT CHANGE - COLUMN SECTION FOR COVERING ARRAYS
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    }
+
+
+
+
+
+    class aMain
+    {
+
+        public static int Main()
+        {
+
+            int li_V_Lp;
+
+            int li_V_Lp_1;
+
+            int li_V_Lp_2;
+
+            int li_K_Lp;
+
+            int li_Misc_Lp;
+
+            int li_Active_Blocks_Lp;
+
+            int li_BLOCKS_Lp;
+
+            int li_T_Lp;
+
+
+            int li_Numerator = 0;
+
+            int li_Denominator = 0;
+
+            int[] la_Cov = new int[aGV.K + 1];
+
+
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("V = {0,4}", aGV.V);
+
+            Console.WriteLine("K = {0,4}", aGV.K);
+
+            Console.WriteLine("T = {0,4}", aGV.T);
+
+            Console.WriteLine();
+
+
+
+            Console.WriteLine("BLOCKS = {0,4}", aGV.BLOCKS);
+
+            Console.WriteLine("REPLACEMENT BLOCKS = {0,4}", aGV.REPLACEMENT_MAXBLOCK);
+
+            Console.WriteLine("REPLACEMENT ACTIVE BLOCKS = {0,4}", aGV.REPLACEMENT_ACTIVEBLOCKS);
+
+
+            Console.WriteLine();
+
+
+
+            Console.WriteLine("REPS = {0,4}", aGV.REPS);
+
+            Console.WriteLine("STEP_BACK_PTS_FT = {0,4}", aGV.STEP_BACK_PTS_FT);
+
+            Console.WriteLine();
+
+
+
+            Console.WriteLine("MAX ELEMENT APPERANCE = {0,4}", aGV.MAX_ELEMENT_APPEARANCE);
+
+            Console.WriteLine("MAX POINTS APPEARANCE = {0,4}", aGV.MAX_POINTS_INSTANCE_APPEARANCE);
+
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.WriteLine("Enter Nos");
+            Console.WriteLine();
+
+            int li_Manual_Exchange_No_1 = 0;
+            int li_Manual_Exchange_No_2 = 0;
+
+            string ls_Manual_line_1 = "";
+
+            string ls_Manual_line_2 = "";
+
+
+            Console.Write("   ENTER INPUT 1 = : "); // Prompt
+
+            ls_Manual_line_1 = Console.ReadLine();                                                                                                 // READLINE *** // Get string from user
+
+            Console.WriteLine();
+
+            Console.Write("   ENTER INPUT 2 = : "); // Prompt
+
+            ls_Manual_line_2 = Console.ReadLine();                                                                                                 // READLINE *** // Get string from user
+
+
+            li_Manual_Exchange_No_1 = Int32.Parse(ls_Manual_line_1);
+
+            li_Manual_Exchange_No_2 = Int32.Parse(ls_Manual_line_2);
+
+            Console.WriteLine();
+            Console.WriteLine("You entered the numbers {0,5} and {1,5}", li_Manual_Exchange_No_1, li_Manual_Exchange_No_2);
+
+            Console.ReadLine();
+
+            return 0;
+
+        }
+
+
+
+
+
+
+
+    } // ***** END MAIN
+
+
+
+
+    public void Main(string[] args)
+        {
+        }
+    }
+}
